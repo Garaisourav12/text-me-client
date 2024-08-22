@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = "https://text-me-backend.onrender.com";
 const API_ENDPOINT = "/api/v1";
 
 const hitApi = async (endpoint, methode, body) => {

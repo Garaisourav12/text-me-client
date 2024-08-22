@@ -8,7 +8,7 @@ import useGetOtherUsers from "../hooks/useGetOtherUsers";
 import { setUser } from "../redux/slices/userSlice";
 import { setOtherUsers } from "../redux/slices/otherUsersSlice";
 
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = "https://text-me-backend.onrender.com";
 
 function HomePage() {
     const dispatch = useDispatch();
