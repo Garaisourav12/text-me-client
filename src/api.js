@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
-const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+const BASE_URL = "http://localhost:8000";
+const API_ENDPOINT = "/api/v1";
 
 const hitApi = async (endpoint, methode, body) => {
     if (body) {

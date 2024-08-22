@@ -8,7 +8,7 @@ import useGetOtherUsers from "../hooks/useGetOtherUsers";
 import { setUser } from "../redux/slices/userSlice";
 import { setOtherUsers } from "../redux/slices/otherUsersSlice";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
+const BASE_URL = "http://localhost:8000";
 
 function HomePage() {
     const dispatch = useDispatch();
