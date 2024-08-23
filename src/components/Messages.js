@@ -2,16 +2,14 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useGetMessages from "../hooks/useGetMessages";
 import Message from "./Message";
+import { setMessages } from "../redux/slices/messagesSlice";
 
 function Messages({ socket }) {
     const dispatch = useDispatch();
     const selectedUser = useSelector((state) => state.selectedUser);
     const messages = useSelector((state) => state.messages);
-    const {
-        messages: retrievedMessages,
-        setMessages,
-        loading,
-    } = useGetMessages(selectedUser);
+    const { messages: retrievedMessages, loading } =
+        useGetMessages(selectedUser);
 
     useEffect(() => {
         dispatch(setMessages(retrievedMessages));
@@ -19,7 +17,7 @@ function Messages({ socket }) {
 
     useEffect(() => {
         socket.on("newMessage", (data) => {
-            setMessages((prev) => [...prev, data]);
+            dispatch(setMessages(data));
         });
     }, []);
 
