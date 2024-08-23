@@ -29,7 +29,7 @@ function OtherUser({ onlineUsers, user }) {
             </div>
             <div className="flex flex-col justify-center flex-1">
                 <p className="font-semibold text-gray-200">{user.name}</p>
-                <p className="text-[.7rem] text-gray-400">{"Last Message"}</p>
+                {/* <p className="text-[.7rem] text-gray-400">{"Last Message"}</p> */}
             </div>
         </div>
     );
