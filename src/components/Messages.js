@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useGetMessages from "../hooks/useGetMessages";
 import Message from "./Message";
-import { setMessages } from "../redux/slices/messagesSlice";
+import { addMessage, setMessages } from "../redux/slices/messagesSlice";
 
 function Messages({ socket }) {
     const dispatch = useDispatch();
@@ -17,7 +17,7 @@ function Messages({ socket }) {
 
     useEffect(() => {
         socket.on("newMessage", (data) => {
-            dispatch(setMessages(data));
+            dispatch(addMessage(data));
         });
     }, []);
 
