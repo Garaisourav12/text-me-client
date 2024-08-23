@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { IoMdSend } from "react-icons/io";
 import hitApi from "../api";
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addMessage } from "../redux/slices/messagesSlice";
 
 function MessageInput() {
     const [message, setMessage] = useState("");
+    const dispatch = useDispatch();
     const selectedUser = useSelector((state) => state.selectedUser);
 
     const sendMessage = async () => {
@@ -20,7 +22,7 @@ function MessageInput() {
                 { message }
             );
 
-            // toast.success(response.data.message);
+            dispatch(addMessage(response.data.message));
         } catch (err) {
             toast.error(err.response.data.error);
         }
