@@ -18,6 +18,8 @@ function Messages({ socket }) {
 	useEffect(() => {
 		socket.on("newMessage", (data) => {
 			if (data.senderId === selectedUser._id) {
+				console.log(data);
+				console.log(selectedUser._id);
 				// Message from selected user
 				dispatch(addMessage(data));
 			}
