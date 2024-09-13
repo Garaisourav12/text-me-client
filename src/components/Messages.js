@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useGetMessages from "../hooks/useGetMessages";
 import Message from "./Message";
@@ -15,14 +15,19 @@ function Messages({ socket }) {
 		dispatch(setMessages(retrievedMessages));
 	}, [retrievedMessages]);
 
-	useEffect(() => {
-		socket.on("newMessage", (data) => {
+	const handleSocketMessage = useCallback(
+		(data) => {
 			if (data.senderId === selectedUser._id) {
-				console.log(data);
-				console.log(selectedUser._id);
 				// Message from selected user
 				dispatch(addMessage(data));
 			}
+		},
+		[selectedUser]
+	);
+
+	useEffect(() => {
+		socket.on("newMessage", (data) => {
+			handleSocketMessage(data);
 		});
 	}, []);
 
