@@ -19,7 +19,7 @@ function Messages({ socket }) {
 		socket.on("newMessage", (data) => {
 			if (data.receiverId === selectedUser._id) {
 				// Message from selected user
-				dispatch(addMessage(data));
+				dispatch(addMessage(data.message));
 			}
 		});
 	}, []);
