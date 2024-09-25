@@ -11,9 +11,25 @@ function Messages({ socket }) {
 	const { messages: retrievedMessages, loading } =
 		useGetMessages(selectedUser);
 
+	/*
+	 * Need message queue here to recived messages effeciently
+	 * At the first render, we need to dispatch setMessages for add old messages
+	 * Then we need to dispatch addMessage for add new messages one by one
+	 * And the queue execute those actions in order (FIFO)
+	 */
 	useEffect(() => {
 		dispatch(setMessages(retrievedMessages));
 	}, [retrievedMessages]);
+
+	useEffect(() => {
+		socket.on("sentMessage", (data) => {
+			dispatch(addMessage(data));
+		});
+
+		return () => {
+			socket.off("sentMessage");
+		};
+	}, []);
 
 	useEffect(() => {
 		socket.on("newMessage", (data) => {
