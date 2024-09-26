@@ -44,12 +44,16 @@ function Messages({ socket }) {
 
 	return (
 		<div className="flex-1 flex flex-col gap-2 py-4 px-3 mx-1 overflow-y-auto">
-			{!loading && (
+			{!loading ? (
 				<>
 					{messages?.map((message) => (
 						<Message key={message._id} message={message} />
 					))}
 				</>
+			) : (
+				<div className="flex-1 flex items-center justify-center">
+					<h1 className="text-center text-white">Loading...</h1>
+				</div>
 			)}
 		</div>
 	);
