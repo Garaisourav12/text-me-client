@@ -22,16 +22,6 @@ function Messages({ socket }) {
 	}, [retrievedMessages]);
 
 	useEffect(() => {
-		socket.on("sentMessage", (data) => {
-			dispatch(addMessage(data));
-		});
-
-		return () => {
-			socket.off("sentMessage");
-		};
-	}, []);
-
-	useEffect(() => {
 		socket.on("newMessage", (data) => {
 			if (data.senderId === selectedUser._id) {
 				// Message from selected user
@@ -39,8 +29,16 @@ function Messages({ socket }) {
 			}
 		});
 
+		socket.on("sentMessage", (data) => {
+			if (data.receiverId === selectedUser._id) {
+				// Message to selected user
+				dispatch(addMessage(data));
+			}
+		});
+
 		return () => {
 			socket.off("newMessage");
+			socket.off("sentMessage");
 		};
 	}, [selectedUser]);
 
