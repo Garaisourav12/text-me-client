@@ -7,6 +7,7 @@ import hitApi from "../api";
 import { clearUser } from "../redux/slices/userSlice";
 import { clearOtherUsers } from "../redux/slices/otherUsersSlice";
 import { clearSelectedUser } from "../redux/slices/selectedUserSlice";
+import { clearMessages } from "../redux/slices/messagesSlice";
 import { useNavigate } from "react-router-dom";
 
 function Sidebar({ onlineUsers }) {
@@ -25,6 +26,8 @@ function Sidebar({ onlineUsers }) {
 			dispatch(clearUser());
 			dispatch(clearOtherUsers());
 			dispatch(clearSelectedUser());
+			dispatch(clearMessages());
+
 			toast.success(response.data.message);
 			navigate("/login");
 		} catch (err) {
